@@ -109,7 +109,7 @@ housing-price-project/
 │   └── train.csv
 │
 ├── notebook/
-│   └── housing_analysis.ipynb
+│   └── real_estate_project.ipynb
 │
 ├── README.md
 └── requirements.txt
