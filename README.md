@@ -1,5 +1,3 @@
-# housing-price-prediction
-Housing price prediction using machine learning (Kaggle dataset)
 # 🏠 Housing Price Prediction (Kaggle Project)
 
 ## 📌 Overview
