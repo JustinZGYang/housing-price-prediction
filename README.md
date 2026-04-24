@@ -8,6 +8,16 @@ A key focus of this project is understanding model behavior, identifying predict
 
 ---
 
+## ⭐ Highlights
+
+- Built an end-to-end housing price prediction pipeline  
+- Achieved R² ~0.89 using Random Forest  
+- Identified systematic underestimation of high-priced houses  
+- Applied log transformation and improved cross-validation performance (~0.86 → ~0.87)  
+- Demonstrated trade-off between accuracy and model stability  
+
+---
+
 ## 📊 Dataset
 
 * Source: Kaggle – *House Prices: Advanced Regression Techniques*
