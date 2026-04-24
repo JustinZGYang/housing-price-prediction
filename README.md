@@ -156,7 +156,7 @@ housing-price-project/
 
 ## 📎 Quick Access
 
-👉 [View Notebook](./notebooks/real_estate_project.ipynb)
+👉 [View Notebook](./notebooks/housing_price_prediction.ipynb)
 
 ---
 
