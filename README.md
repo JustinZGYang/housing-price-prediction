@@ -2,7 +2,9 @@
 
 ## 📌 Overview
 
-This project builds a machine learning model to predict housing prices using a real-world dataset from Kaggle. It demonstrates an end-to-end data science workflow, including data cleaning, feature engineering, model development, and performance evaluation.
+This project builds and evaluates machine learning models to predict housing prices using a real-world dataset from Kaggle. It demonstrates a complete data science workflow, including data cleaning, feature engineering, model development, evaluation, and interpretation.
+
+A key focus of this project is understanding model behavior, identifying prediction bias, and testing improvement strategies such as log transformation.
 
 ---
 
@@ -20,8 +22,8 @@ This project builds a machine learning model to predict housing prices using a r
 
   * Numerical features → imputed with mean
   * Categorical features → filled with `"None"`
-* Applied one-hot encoding to transform categorical variables
-* Final dataset expanded to ~300 features after encoding
+* Applied one-hot encoding for categorical variables
+* Final feature space expanded to ~300 features
 
 ---
 
@@ -30,84 +32,121 @@ This project builds a machine learning model to predict housing prices using a r
 ### 🔹 Baseline Model: Linear Regression
 
 * Simple and interpretable
-* Test R²: **~0.44**
+* Test R²: **0.44**
 
-### 🔹 Improved Model: Random Forest
+### 🔹 Random Forest (No Transformation)
 
 * Captures non-linear relationships
-* Test R²: **~0.89**
+* Test R²: **0.89**
 
 ---
 
 ## 📈 Model Evaluation
 
-* Used **train-test split (random_state=42)** for reproducibility
-* Applied **5-fold cross-validation** for robust performance estimation
+### 🔍 Key Observation
 
-**Results:**
+From the prediction scatter plot:
 
-* Test R²: **~0.89**
-* Cross-validation R²: **~0.86**
+* Lower-priced houses are predicted relatively accurately
+* Higher-priced houses tend to be **systematically underestimated**
 
-👉 The close alignment between these scores indicates strong model stability and generalization.
-
----
-
-## 📊 Visualization
-
-### 🔹 Actual vs Predicted
-
-* Scatter plot comparing predicted vs actual prices
-* Shows strong alignment, indicating good model performance
-
-### 🔹 Feature Importance
-
-* Visualized top features using a horizontal bar chart
-* Added value labels for interpretability
+👉 This indicates model bias and difficulty in learning rare high-value properties.
 
 ---
 
-## 🔍 Key Insights
+### 📊 Actual vs Predicted (Before Log)
 
-Top features influencing housing prices:
+![Actual vs Predicted](outputs/figures/actual_vs_predicted.png)
 
-* OverallQual (overall quality)
-* GrLivArea (above-ground living area)
-* TotalBsmtSF (basement area)
-* GarageArea (garage size)
+👉 High-priced houses are consistently below the reference line, showing underestimation.
 
-👉 These results align with real-world housing valuation factors.
+---
+
+## 🔁 Model Improvement: Log Transformation
+
+To address skewness in housing prices, log transformation was applied:
+
+* Test R² after log: **0.88**
+
+👉 Result:
+
+* No significant improvement in single test performance
+* High-price underestimation still persists
+
+---
+
+### 📊 Actual vs Predicted (After Log)
+
+![Actual vs Predicted Log](outputs/figures/actual_vs_predicted_log.png)
+
+👉 Log transformation improves distribution balance slightly but does not eliminate underestimation of high-priced houses.
+
+---
+
+## 🔬 Cross Validation (Model Comparison)
+
+| Model                  | CV R² |
+| ---------------------- | ----- |
+| Random Forest (no log) | ~0.86 |
+| Random Forest (log)    | ~0.87 |
+
+### 🎯 Key Insight
+
+* Log transformation improves **cross-validation performance**
+* Indicates better **model stability and generalization**
+* Highlights the importance of evaluating models beyond a single test split
+
+---
+
+## 📊 Feature Importance
+
+![Top 10 Feature Importance](outputs/figures/top_10_feature_importance.png)
+
+👉 The most important features include:
+
+* OverallQual
+* GrLivArea
+* TotalBsmtSF
+* GarageArea
+
+These align with real-world housing valuation factors.
 
 ---
 
 ## 🛠️ Tools & Technologies
 
 * Python (Pandas, NumPy, Scikit-learn)
-* Matplotlib (visualization)
+* Matplotlib
 * Jupyter Notebook
 
 ---
 
 ## 🚀 Key Takeaways
 
-* Built a complete machine learning pipeline using real-world data
-* Handled missing values and categorical features effectively
-* Compared multiple models and improved performance
-* Applied cross-validation for reliable evaluation
-* Interpreted model results using feature importance and visualization
+* Random Forest significantly outperforms Linear Regression
+* The model tends to underestimate high-priced houses
+* Log transformation improves model stability but not test accuracy
+* Cross-validation provides a more reliable evaluation metric
+* Feature importance aligns with domain knowledge
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text id="proj_struct_v7"
 housing-price-project/
 │
 ├── data/
 │   └── train.csv
 │
-├── notebook/
+├── notebooks/
 │   └── real_estate_project.ipynb
+│
+├── outputs/
+│   └── figures/
+│       ├── actual_vs_predicted.png
+│       ├── actual_vs_predicted_log.png
+│       └── top_10_feature_importance.png
 │
 ├── README.md
 └── requirements.txt
@@ -117,7 +156,7 @@ housing-price-project/
 
 ## 📎 Quick Access
 
-👉 [View Notebook](./notebook/housing_analysis.ipynb)
+👉 [View Notebook](./notebooks/real_estate_project.ipynb)
 
 ---
 
